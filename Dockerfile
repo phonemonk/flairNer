@@ -1,4 +1,5 @@
-From python:3.6-slim
+FROM nvidia/cuda:10.1-devel-ubuntu18.04
+#From python:3.6-slim
 #From anibali/pytorch:no-cuda
 
 RUN apt-get update && apt-get install -y unixodbc-dev gcc g++

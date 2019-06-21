@@ -1,0 +1,13 @@
+title: Flair NER algo for Acharya
+owner: Phonemonk
+author: phonemonk
+train:
+  cmd: python3 train_flair.py trainfile.conll
+  type: cmd
+  input: data/trainfile.conll
+  output: stdout
+eval:
+  cmd: python3 train_flair.py 
+  type: cmd
+  input: stdin
+  output: stdout

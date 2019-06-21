@@ -12,11 +12,12 @@ from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from typing import List
 
 class ner_trainer(object):
-    def __init__(self): 
+    def __init__(self, dataFolder, trainFile): 
         self.dataFolder = dataFolder
-        self.trainFile = trainFaile
+        self.trainFile = trainFile
         self.columns = {0: 'text', 1: 'pos', 2: 'ner'}
         pass
 
     def LoadConll03(self, dataFolder, trainFile, testFile=None, devFile=None):
         self.corpus = ColumnCorpus(dataFolder, self.columns, trainFile, testFile, devFile) 
+        print(self.corpus.train[0].to_tagged_string('ner'))
