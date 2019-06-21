@@ -15,7 +15,7 @@ class ner_trainer(object):
     def __init__(self, dataFolder, trainFile): 
         self.dataFolder = dataFolder
         self.trainFile = trainFile
-        self.columns = {0: 'text', 1: 'pos', 2: 'ner'}
+        self.columns = {0: 'text', 1: 'pos', 2: 'empty', 3: 'ner'}
         pass
 
     def LoadConll03(self, dataFolder, trainFile, testFile=None, devFile=None):
