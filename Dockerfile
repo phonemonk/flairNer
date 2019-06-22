@@ -11,7 +11,7 @@ WORKDIR flairNER/
 RUN pip3 install -r requirements.txt
 
 
-COPY * flairNER/
+COPY * ./
 RUN mkdir -p data/
 RUN mkdir -p models/
 
