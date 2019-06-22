@@ -6,7 +6,7 @@
 # 2019
 #
 
-from flair.data import Corpus
+from flair.data import Corpus, Sentence
 from flair.datasets import ColumnCorpus
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from flair.models import SequenceTagger
@@ -49,3 +49,16 @@ class ner_trainer(object):
                             learning_rate=learning_rate, 
                             mini_batch_size=batch_size, 
                             max_epochs=epochs)
+
+
+class ner_parser(object):
+    def __init__(self):
+        pass
+    
+    def loadModel(self, model_path):
+        self.model = SequenceTagger.load(model_path)
+
+    def parseSentence(self, instr):
+        sentence = Sentence(instr)
+        self.model.predict(sentence)
+        return sentence.to_dict(tag_type='ner')
