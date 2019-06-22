@@ -6,12 +6,14 @@ RUN apt-get update && apt-get install -y unixodbc-dev gcc g++
 RUN apt-get install -y python3 python3-dev python3-pip
 
 RUN mkdir -p flairNER/
-COPY * flairNER/
+COPY requirements.txt flairNER/
 WORKDIR flairNER/
-
 RUN pip3 install -r requirements.txt
 
+
+COPY * flairNER/
 RUN mkdir -p data/
+RUN mkdir -p models/
 
 #RUN python -c 'import flair; _ = flair.models.SequenceTagger.load("ner-fast")'
 
