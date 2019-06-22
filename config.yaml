@@ -7,7 +7,7 @@ train:
   input: data/trainfile.conll
   output: stdout
 eval:
-  cmd: python3 train_flair.py 
+  cmd: python3 -c "print('hello')"
   type: cmd
   input: stdin
   output: stdout
