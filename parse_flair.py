@@ -7,6 +7,7 @@ from flairNer import ner_parser
 
 models_path = "models/tagger1/final-model.pt"
 
+logging.getLogger("flair").setLevel(logging.WARNING)
 
 logpath = "parse_ner.log"
 
@@ -26,7 +27,9 @@ while True:
     ins = inb.decode("utf-8")
     logging.info(PY + "3:Received data: %s len: %d", ins, len(ins))
 
-    tags = np.parseSentence(ins)
+    new_ins = " ".join(ins.split("\n"))
+
+    tags = np.parseSentence(new_ins)
     logging.info(PY + "4: After parse..")
     print(tags)
     logging.info(PY + "5: Done")

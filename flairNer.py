@@ -58,7 +58,16 @@ class ner_parser(object):
     def loadModel(self, model_path):
         self.model = SequenceTagger.load(model_path)
 
-    def parseSentence(self, instr):
+    def oldparseSentence(self, instr):
         sentence = Sentence(instr)
         self.model.predict(sentence)
         return sentence.to_dict(tag_type='ner')
+
+    def parseSentence(self, instr):
+        sentence = Sentence(instr)
+        self.model.predict(sentence)
+        outdata = []
+        for token in sentence.tokens:
+            strdata = token.text + " " + token.get_tag('ner').value
+            outdata += [strdata]
+        return "\n".join(outdata)
