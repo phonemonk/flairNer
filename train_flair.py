@@ -3,7 +3,7 @@ import sys
 import os
 import logging
 
-from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
+from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings, PooledFlairEmbeddings
 from flairNer import ner_trainer
 
 logpath = "train_ner.log"
@@ -22,7 +22,11 @@ nt = ner_trainer(datafolder, infile)
 
 nt.LoadConll03(datafolder, infile)
 
-nt.LoadEmbeddings([WordEmbeddings('glove')])
+nt.LoadEmbeddings([
+    WordEmbeddings('glove'), 
+    PooledFlairEmbeddings('news-forward', pooling='min'), 
+    PooledFlairEmbeddings('news-backward', pooling='min')
+    ])
 
 nt.train("models/tagger1", learning_rate=0.9, batch_size=64, hidden_size=1000, epochs=200)
 
