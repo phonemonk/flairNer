@@ -24,7 +24,7 @@ nt.LoadConll03(datafolder, infile)
 
 nt.LoadEmbeddings([WordEmbeddings('glove')])
 
-nt.train("models/tagger1")
+nt.train("models/tagger1", learning_rate=0.9, batch_size=64, hidden_size=1000, epochs=200)
 
 print("Done")
 
