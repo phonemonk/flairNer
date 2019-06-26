@@ -25,10 +25,10 @@ nt.LoadConll03(datafolder, infile)
 nt.LoadEmbeddings([
     WordEmbeddings('glove'), 
     PooledFlairEmbeddings('news-forward', pooling='min'), 
-    PooledFlairEmbeddings('news-backward', pooling='min')
+    #PooledFlairEmbeddings('news-backward', pooling='min')
     ])
 
-nt.train("models/tagger1", learning_rate=0.9, batch_size=64, hidden_size=1000, epochs=200)
+nt.train("models/tagger1", learning_rate=0.9, batch_size=32, hidden_size=256, epochs=200)
 
 print("Done")
 
