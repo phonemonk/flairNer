@@ -3,7 +3,7 @@ import sys
 import os
 import logging
 
-from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings, PooledFlairEmbeddings
+from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings, PooledFlairEmbeddings, FlairEmbeddings
 from flairNer import ner_trainer
 
 logpath = "train_ner.log"
@@ -25,6 +25,7 @@ nt.LoadConll03(datafolder, infile)
 nt.LoadEmbeddings([
     WordEmbeddings('glove'), 
     PooledFlairEmbeddings('news-forward', pooling='min'), 
+    FlairEmbeddings('resources/taggers/language_model/best-lm.pt')
     #PooledFlairEmbeddings('news-backward', pooling='min')
     ])
 
