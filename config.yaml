@@ -11,3 +11,9 @@ eval:
   type: cmd
   input: stdin
   output: stdout
+vocab:
+  cmd: python3 train_we.py trainfile.conll
+  type: cmd
+  format: Text
+  input: data/vocabulary/
+  output: stdout
