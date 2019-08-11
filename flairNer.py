@@ -6,12 +6,15 @@
 # 2019
 #
 
-from flair.data import Corpus, Sentence
+from typing import List
+from pathlib import Path
+
+from flair.data import Corpus, Sentence, Dictionary
 from flair.datasets import ColumnCorpus
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
-from flair.models import SequenceTagger
+from flair.models import SequenceTagger, LanguageModel
 from flair.trainers import ModelTrainer
-from typing import List
+from flair.trainers.language_model_trainer import LanguageModelTrainer, TextCorpus
 
 class ner_trainer(object):
     def __init__(self, dataFolder, trainFile): 
@@ -71,3 +74,26 @@ class ner_parser(object):
             strdata = token.text + " " + token.get_tag('ner').value
             outdata += [strdata]
         return "\n".join(outdata)
+
+class trainLanguage(object):
+    def __init__(self, charPath, is_forward=True):
+        self.is_forward_lm = is_forward
+        self.dictionary : Dictionary = Dictionary.load(charPath)
+
+    def trainLanguage(self, corpusPath):
+        self.corpus = TextCorpus(Path(corpusPath),
+        self.dictionary,
+        self.is_forward_lm,
+        character_level=True)
+
+        self.language_model = LanguageModel(self.dictionary,
+        self.is_forward_lm,
+        hidden_size=128,
+        nlayers=10)
+
+        self.trainer = LanguageModelTrainer(self.language_model, self.corpus)
+
+        self.trainer.train('resources/taggers/language_model',
+                    sequence_length=10,
+                    mini_batch_size=10,
+                    max_epochs=10)
