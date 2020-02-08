@@ -8,7 +8,7 @@ RUN apt-get install -y python3 python3-dev python3-pip
 RUN mkdir -p flairNER/
 COPY requirements.txt flairNER/
 WORKDIR flairNER/
-RUN pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp36-cp36m-linux_x86_64.whl
+#RUN pip3 install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp36-cp36m-linux_x86_64.whl
 RUN pip3 install -r requirements.txt
 
 
